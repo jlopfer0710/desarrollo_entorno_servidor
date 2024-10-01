@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -8,15 +8,14 @@
 <body>
 	<?php  
 		$nombre_usuario="jlopfer0710";
-		$patron='/[a-z,-,_,A-Z,0-9]/';
-		$patron2='/[+,@,&,$,?,¿,¡,!,|,\,*]/';
+		$patron='/^[a-z-_A-Z0-9]{3,20}$/';
 		if(strlen($nombre_usuario)<3 XOR strlen($nombre_usuario)>20){
 			echo "longitud de cadena no permitida (min 3 max 20)";
 		}else{
-			if(preg_match($patron2,$nombre_usuario)){
-				echo "nombre de usuario no válido <br>".$nombre_usuario;
-			}else if(preg_match($patron,$nombre_usuario)){
+			if(preg_match($patron,$nombre_usuario)){
 				echo "nombre de usuario válido <br>".$nombre_usuario;
+			}else{
+				echo "nombre de usuario no válido <br>".$nombre_usuario;
 			}
 		}
 	?>
