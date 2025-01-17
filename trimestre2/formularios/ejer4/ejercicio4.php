@@ -43,17 +43,12 @@
         }else{
             $categoria=$_POST['categoria'];
         }
-        if(!isset($_POST['imagen'])){
-            $imagen="No proporcionada";
-        }else{
-            $imagen=$_POST['imagen'];
-        }
         if(!isset($_POST['titulo'])){
     ?> 
     <p style="color:blue;font-size: 30px;font-weight:bold;">Subida de ficheros</p>
     <p style="font-weight:bold;font-size:25px">Insertar nueva noticia</p>
     <div id="puntos">
-        <form action="" method="post" >
+        <form action="<?php htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post" >
             <p>Título:* <input type="text" name="titulo" id=""></p>
             <p>Texto:* <br> <textarea name="texto" id=""></textarea></p>
             <p>Categoría: <select name="categoria" id="">
@@ -72,13 +67,22 @@
     <div></div>
     <?php 
         if($texto!=="" && $titulo!==""){
-            echo "<p>La noticia ha sido recibida correctamente:</p>";
-            echo "<ul>";
-            echo "<li>Título: $titulo</li>";
-            echo "<li>Texto: $texto</li>";
-            echo "<li>Categoría: $categoria</li>";
-            echo "<li>Imagen: $imagen</li>";
-            echo "</ul>";
+            $archivo_nombre=$_FILES['imagen']['name'];
+            $archivo_tmp=$_FILES['imagen']['tmp_name'];
+            $archivo_destino= "img/". basename($archivo_nombre);
+            if(move_uploaded_file($archivo_tmp,$archivo_destino)){
+                echo "<p>La noticia ha sido recibida correctamente:</p>";
+                echo "<ul>";
+                echo "<li>Título: $titulo</li>";
+                echo "<li>Texto: $texto</li>";
+                echo "<li>Categoría: $categoria</li>";
+                echo "<li>Imagen: $imagen</li>";
+                echo "</ul>";
+            }else{
+                echo "<p> style='color: red;'</p>";
+            }
+           
+                
         }else{
             echo "<p>No se ha podido realizar la inserción debido a los siguientes errores:</p>";
             echo "<ul>";
