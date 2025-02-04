@@ -15,5 +15,20 @@ ini_set('display_errors', 1);
     } else {
         echo "No se ha recibido el texto.";
     }
+    if ($nombre != "" && $text != "") {
+        $fichero = "datos.txt";
+    
+        $file = fopen($fichero, "a");
+    
+        if ($file) {
+            $contenido = "\n-------------------------------------------------------------------------------------------------------\n" . $nombre . "\n" .$text ."\n-------------------------------------------------------------------------------------------------------";
+            fwrite($file, $contenido);
+            fclose($file);
+    
+            echo "<br>Datos guardados correctamente.";
+        } else {
+            echo "<br>Error al abrir el archivo.";
+        }
+    }
 }
 ?>
