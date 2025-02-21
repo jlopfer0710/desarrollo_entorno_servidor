@@ -141,7 +141,7 @@
                 <td><?php echo date('d/m/Y', strtotime($row['fecha'])); ?></td>
                 <td>
                     <?php if (!empty($row['imagen'])): ?>
-                        <img src="<?php echo htmlspecialchars($row['imagen']); ?>">
+                        <img style="height: 100px;width: 100px;" src="<?php echo htmlspecialchars($row['imagen']); ?>">
                     <?php else: ?>
                         No hay imagen
                     <?php endif; ?>
