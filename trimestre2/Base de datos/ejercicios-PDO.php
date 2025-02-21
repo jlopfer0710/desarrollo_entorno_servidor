@@ -19,7 +19,7 @@
             header("Location: " . $_SERVER['PHP_SELF']);
             exit();
         } else {
-            echo "<p style='color:red;'>No se ha seleccionado ninguna noticia para eliminar.</p>";
+            echo "<p class='error'>No se ha seleccionado ninguna noticia para eliminar.</p>";
         }
     }
 
@@ -38,7 +38,7 @@
                 }
                 $imagenRuta = "img/" . $nombreImagen;
                 if (!move_uploaded_file($_FILES['imagen']['tmp_name'], $imagenRuta)) {
-                    echo "<p style='color:red;'>Error al subir la imagen.</p>";
+                    echo "<p class='error'>Error al subir la imagen.</p>";
                     $imagenRuta = NULL;
                 }
             }
@@ -48,7 +48,7 @@
             header("Location: " . $_SERVER['PHP_SELF']);
             exit();
         } else {
-            echo "<p style='color:red;'>Todos los campos son obligatorios.</p>";
+            echo "<p class='error'>Todos los campos son obligatorios.</p>";
         }
     }
 
@@ -74,11 +74,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Noticias</title>
     <style>
-        table { width: 100%; border-collapse: collapse; }
-        th, td { border: 1px solid #ddd; padding: 8px; }
-        th { background-color: #f4f4f4; }
-        img { width: 100px; height: auto; }
-        textarea { vertical-align: top; }
+        BODY {font-family: verdana,arial, sans-serif; font-size: 10pt;}
+        H1 {font-size: 16pt; font-weight: bold; color: #0066CC;}
+        H2 {font-size: 12pt; font-weight: bold; font-style: italic; color: black;}
+        H3 {font-size: 10pt; font-weight: bold; color: black;}
+        FORM.borde {border: 1px dotted #0066CC; padding: 0.5em 0.2em; width: 80%;}
+        FORM P {clear: left; margin: 0.2em; padding: 0.1em;}
+        FORM P LABEL {float: left; width: 25%; font-weight: bold;}
+        .error {color: red;}
+        TH {font-size: 10pt; font-weight: bold; color: white; background: #0066CC; text-align: left;}
+        TD {font-size: 10pt; background: #CCCCCC;}
+        TD.derecha {font-size: 10pt; text-align: right; background: #FFFFFF;}
+        TD.izquierda {font-size: 10pt; text-align: left; background: #FFFFFF;}
     </style>
 </head>
 <body>
@@ -130,13 +137,6 @@
 <form method="post" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
     <p><strong>Título:*</strong> <input type="text" name="titulo" required></p>
     <p><strong>Texto:*</strong> <textarea name="texto" required></textarea></p>
-    <label for=""><strong>Categoría: </strong></label>
-    <select name="categoria">
-        <option value="promociones">Promociones</option>
-        <option value="ofertas">Ofertas</option>
-        <option value="costas">Costas</option>
-    </select><br><br>
-    <input type="file" name="imagen"><br><br>
     <button type="submit" name="insertar">Insertar noticia</button>
 </form>
 </body>
